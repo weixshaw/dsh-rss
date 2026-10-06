@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<opml version="1.0">
+  <head><title>订阅</title></head>
+  <body>
+    <outline text="技术" title="技术">
+      <outline text="前端" title="前端">
+        <outline type="rss" text="张鑫旭博客" title="张鑫旭博客" xmlUrl="https://www.zhangxinxu.com/wordpress/feed/" htmlUrl="https://www.zhangxinxu.com/"/>
+      </outline>
+      <outline type="rss" text="阮一峰周刊" title="阮一峰周刊" xmlUrl="http://www.ruanyifeng.com/blog/atom.xml"/>
+    </outline>
+    <outline type="rss" text="无分组源" title="无分组源" xmlUrl="https://example.com/feed.xml"/>
+    <outline type="rss" text="重复源（大小写差异）" xmlUrl="https://EXAMPLE.com/feed.xml/"/>
+    <outline type="rss" text="非法协议源" xmlUrl="ftp://example.com/x"/>
+  </body>
+</opml>

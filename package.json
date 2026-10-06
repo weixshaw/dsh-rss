@@ -1,0 +1,60 @@
+{
+  "name": "dsh-rss",
+  "version": "0.6.0",
+  "description": "DSH RSS 阅读器插件：自定义 RSS/Atom 订阅、FreshRSS（Google Reader API）账号同步与 AI 摘要/翻译/问答（BYOK，OpenAI 兼容接口）。",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "lib/",
+    "scripts/check.js",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-slots"
+      ]
+    },
+    "manifestVersion": 1
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh-tools": "^0.2.0-rc.1",
+    "dsh-better-sidebar": "^0.24.0"
+  },
+  "peerDependenciesMeta": {
+    "dsh-better-sidebar": {
+      "optional": true
+    }
+  },
+  "scripts": {
+    "test": "node --test",
+    "check": "node scripts/check.js"
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "rss",
+    "atom",
+    "freshrss",
+    "ai"
+  ],
+  "license": "MIT",
+  "private": true
+}

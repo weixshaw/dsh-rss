@@ -1,0 +1,14 @@
+{
+  "name": "dsh-rss",
+  "owner": "phantasy",
+  "url": "https://github.com/phantasy/dsh-rss",
+  "page": "",
+  "category": "tools",
+  "description": {
+    "en": "RSS reader for DeepSeek Harness: custom RSS/Atom subscriptions with OPML import/export, self-hosted FreshRSS account sync over the Google Reader API (read/star written back), and BYOK AI summary/translate/Q&A against any OpenAI-compatible endpoint. Ships DSH agent tools rss_recent_digest / rss_article_digest.",
+    "zh": "DSH 的 RSS 阅读器插件：自定义 RSS/Atom 订阅（OPML 导入导出）、自托管 FreshRSS 账号同步（Google Reader API，已读/收藏双向写回）、自带 Key 的 AI 摘要/翻译/单篇问答（OpenAI 兼容接口）。附带 rss_recent_digest / rss_article_digest 两个模型工具。"
+  },
+  "npm": null,
+  "install": "dsh plugin --profile web add github:phantasy/dsh-rss",
+  "added": "2026-10-06"
+}

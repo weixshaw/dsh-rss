@@ -1,0 +1,12 @@
+# dsh-rss bundle patch —— profile bundle 挂载行。
+#
+# 通过官方 CLI 安装时（dsh plugin --profile <name> add dsh-rss 或本地路径），
+# CLI 会依据 package.json 的 dsh.bundle.patch 找到本文件，并把 dsh-rss 追加进
+# dsh.profile.bundles；profile 启动时合并本 patch（一条 insert 行），
+# 与手动在 profile 的 cordis.patch.yml 里加挂载行等价。
+#
+# 手动安装（不作为 bundle）：把下面相同的 insert 行写进
+# $DSH_HOME/profiles/<name>/cordis.patch.yml 也可以。
+- insert:
+    - id: dsh-rss
+      name: 'dsh-rss'

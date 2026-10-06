@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Atom 示例源</title>
+  <subtitle>测试用 Atom</subtitle>
+  <link rel="self" href="https://example.org/atom.xml"/>
+  <link rel="alternate" type="text/html" href="https://example.org/"/>
+  <updated>2026-10-05T12:00:00Z</updated>
+  <entry>
+    <id>urn:uuid:aaa-1</id>
+    <title>Atom 条目一 &amp; 实体</title>
+    <link rel="alternate" type="text/html" href="https://example.org/1"/>
+    <link rel="enclosure" type="audio/mpeg" href="https://example.org/1.mp3"/>
+    <published>2026-10-04T10:00:00Z</published>
+    <updated>2026-10-04T11:00:00Z</updated>
+    <author><name>李四</name></author>
+    <summary>条目摘要</summary>
+    <content type="html">&lt;p&gt;Atom 正文 &lt;i&gt;斜体&lt;/i&gt;&lt;/p&gt;&lt;iframe src="https://evil.example"&gt;&lt;/iframe&gt;</content>
+  </entry>
+  <entry>
+    <id>urn:uuid:aaa-2</id>
+    <title>Atom 条目二</title>
+    <link href="https://example.org/2"/>
+    <published>2026-10-03T09:00:00Z</published>
+    <summary>第二个摘要</summary>
+  </entry>
+</feed>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>示例博客 &amp; 周刊</title>
+    <link>https://example.com/blog/</link>
+    <description>测试用 RSS 2.0</description>
+    <item>
+      <title>第一篇：实体 &lt;测试&gt; &amp; CDATA</title>
+      <link>https://example.com/blog/1</link>
+      <guid isPermaLink="false">post-1</guid>
+      <pubDate>Mon, 05 Oct 2026 08:00:00 GMT</pubDate>
+      <dc:creator>张三</dc:creator>
+      <description><![CDATA[<p>摘要内容 &amp; 更多</p>]]></description>
+      <content:encoded><![CDATA[<p>正文 <b>加粗</b></p><script>alert('x')</script><img src="https://img.example.com/a.png" alt="示意图"><p onclick="evil()">尾段</p>]]></content:encoded>
+      <enclosure url="https://example.com/audio/1.mp3" type="audio/mpeg" length="123"/>
+    </item>
+    <item>
+      <title>第二篇：无日期</title>
+      <link>https://example.com/blog/2</link>
+      <guid>post-2</guid>
+      <description>纯文本摘要</description>
+    </item>
+    <item>
+      <title>第三篇：危险链接</title>
+      <link>https://example.com/blog/3</link>
+      <guid>post-3</guid>
+      <pubDate>Tue, 06 Oct 2026 09:30:00 +0800</pubDate>
+      <description>&lt;a href="javascript:alert(1)"&gt;点我&lt;/a&gt;</description>
+    </item>
+  </channel>
+</rss>
