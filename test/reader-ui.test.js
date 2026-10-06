@@ -1529,3 +1529,36 @@ test('订阅栏快速添加：输入地址点 ＋（或回车）调 feeds/add，
   assert.ok(t.nodesWithText('请先粘贴').length, '空地址应提示')
   assert.equal(t.fetchLog.length, before, '空地址不应发请求')
 })
+
+// ---------- 响应鲁棒解析：空/非 JSON/中断响应不再抛天书（fetch-full 实机 bug 的客户端半边） ----------
+
+test('parseRes：空体/HTML 错误页/读体失败 → 可读错误对象；正常 JSON 与 json() 形态照常', async () => {
+  const src2 = readFileSync(join(dirname(fileURLToPath(import.meta.url)), '..', 'client.js'), 'utf8')
+  const loads = []
+  const sandbox = { window: { __ModuleLoader__: { load: (s) => loads.push(s) } }, console }
+  vm.createContext(sandbox)
+  vm.runInContext(src2, sandbox)
+  const mod = loads[0].factory(() => ({ createElement: () => ({}) }))
+  const parse = mod._parseRes
+
+  // 正常 JSON 文本
+  const ok = await parse({ text: async () => '{"ok":true,"v":1}' })
+  assert.deepEqual({ ok: ok.ok, v: ok.v }, { ok: true, v: 1 })
+  // 空体（被掐断的响应）→ 可读错误，绝不抛 "Unexpected end of JSON input"
+  const empty = await parse({ text: async () => '' })
+  assert.equal(empty.ok, false)
+  assert.match(empty.error, /响应为空/)
+  assert.match(empty.error, /超时|重试/)
+  // HTML 错误页（网关 502 等）→ 非 JSON 错误，附原文片段
+  const html = await parse({ text: async () => '<html><body>502 Bad Gateway</body></html>' })
+  assert.equal(html.ok, false)
+  assert.match(html.error, /不是 JSON/)
+  assert.match(html.error, /502 Bad Gateway/)
+  // 只有 json() 的旧形态（测试 harness / 旧宿主）→ 照常工作
+  const legacy = await parse({ json: async () => ({ ok: true, via: 'json' }) })
+  assert.deepEqual({ ok: legacy.ok, via: legacy.via }, { ok: true, via: 'json' })
+  // 读体本身抛错（连接中断）
+  const dead = await parse({ text: async () => { throw new Error('aborted') } })
+  assert.equal(dead.ok, false)
+  assert.match(dead.error, /aborted/)
+})

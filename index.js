@@ -546,7 +546,8 @@ export function buildRouteTable(deps) {
     const article = await store.getArticle(String(body.id))
     if (!article) return fail(res, 404, '文章不存在')
     if (!article.url || !/^https?:\/\//i.test(article.url)) throw new RssError('该文章没有可抓取的原文链接')
-    const res2 = await fetchBounded(article.url, { timeoutMs: 20000, maxBytes: 3 * 1024 * 1024, headers: { accept: 'text/html,application/xhtml+xml,*/*;q=0.8', 'user-agent': 'Mozilla/5.0 (compatible; dsh-rss/0.5)' } })
+    // 12s 超时：与 FreshRSS 一致——慢源快速失败，避免响应长时间挂起被客户端链路掐断
+    const res2 = await fetchBounded(article.url, { timeoutMs: 12000, maxBytes: 3 * 1024 * 1024, headers: { accept: 'text/html,application/xhtml+xml,*/*;q=0.8', 'user-agent': 'Mozilla/5.0 (compatible; dsh-rss/0.5)' } })
     if (!res2.ok) throw new RssError(`抓取原文失败：HTTP ${res2.status}`)
     if (!/html|xml|text\/plain/i.test(res2.headers['content-type'] || 'text/html')) throw new RssError('原文不是 HTML 页面')
     const html = extractReadableHtml(res2.text)

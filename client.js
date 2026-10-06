@@ -181,21 +181,48 @@ window.__ModuleLoader__.load({
     // 与 package.json 版本保持一致（scripts/check.js 有一致性门禁）。
     // 用于「客户端新、宿主旧」检测：本地路径安装不会热更新宿主端，硬刷新后客户端先行
     // 生效，此时新路由（图片代理等）在旧宿主上 404——与其无声失败，不如显式提示重启。
-    var CLIENT_VERSION = '0.6.0'
+    var CLIENT_VERSION = '0.6.1'
+
+    /**
+     * 响应鲁棒解析：先取文本再 JSON.parse。宿主链路上任何环节掐断响应
+     * （慢请求被客户端层中断、代理返回 HTML 错误页等）时，返回可读的
+     * {ok:false,error} 而不是抛 "Unexpected end of JSON input" 这类天书。
+     */
+    function parseRes(res) {
+      return Promise.resolve()
+        .then(function () {
+          if (res && typeof res.text === 'function') return res.text()
+          if (res && typeof res.json === 'function') return res.json()
+          return null
+        })
+        .then(function (body) {
+          if (body == null) return { ok: false, error: '宿主无响应' }
+          if (typeof body !== 'string') return body
+          if (!body.trim()) return { ok: false, error: '宿主响应为空：请求可能因超时被中断（慢源可稍后重试）' }
+          try {
+            return JSON.parse(body)
+          } catch (e) {
+            return { ok: false, error: '宿主响应不是 JSON（连接可能被中断或网关返回了错误页）：' + body.slice(0, 120) }
+          }
+        })
+        .catch(function (e) {
+          return { ok: false, error: '请求失败或连接中断：' + (e && e.message) }
+        })
+    }
 
     function call(method, args) {
       return fetch('/dsh-rss/' + method, {
         method: 'POST',
         headers: { 'content-type': 'application/json', 'x-dsh-rss': '1' },
         body: JSON.stringify(args || {}),
-      }).then(function (res) { return res.json() })
+      }).then(parseRes)
     }
 
     function callGet(method) {
       return fetch('/dsh-rss/' + method, {
         method: 'GET',
         headers: { 'x-dsh-rss': '1' },
-      }).then(function (res) { return res.json() })
+      }).then(parseRes)
     }
 
     // ---------- 本地 UI 状态持久化（localStorage 可用才启用；任何异常一律忽略） ----------
@@ -1706,6 +1733,7 @@ window.__ModuleLoader__.load({
     exports._call = call
     exports._App = App // 内部导出：行为回归测试用（生产代码不依赖）
     exports._relTime = relTime
+    exports._parseRes = parseRes // 内部导出：响应解析鲁棒性的单元测试用
     exports._validSavedScope = validSavedScope // 内部导出：持久化恢复校验的单元测试用
     return module.exports
   },

@@ -1,6 +1,6 @@
 {
   "name": "dsh-rss",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "DSH RSS 阅读器插件：自定义 RSS/Atom 订阅、FreshRSS（Google Reader API）账号同步与 AI 摘要/翻译/问答（BYOK，OpenAI 兼容接口）。",
   "type": "module",
   "main": "index.js",
