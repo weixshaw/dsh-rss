@@ -5,8 +5,8 @@
 ## 第一步：发布到 GitHub（一切的前提）
 
 ```bash
-# 在 GitHub 创建空仓库 phantasy/dsh-rss（不要初始化 README），然后：
-git remote add origin git@github.com:phantasy/dsh-rss.git
+# 在 GitHub 创建空仓库 weixshaw/dsh-rss（不要初始化 README），然后：
+git remote add origin https://github.com/weixshaw/dsh-rss.git
 git push -u origin main
 ```
 
@@ -18,7 +18,7 @@ dsh-plugin-radar 每日 02:00 全量扫描带该 topic 的仓库**自动收录**
 指南：https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/blob/main/contributing.md
 
 1. Fork awesome-dsh-plugin，新建分支；
-2. 把本目录 `awesome-dsh-plugin.yml` 的内容保存为 `data/plugins/phantasy__dsh-rss.yml`（这一个文件就是全部投稿，README 由脚本自动生成，**不要手编**）；
+2. 把本目录 `awesome-dsh-plugin.yml` 的内容保存为 `data/plugins/weixshaw__dsh-rss.yml`（这一个文件就是全部投稿，README 由脚本自动生成，**不要手编**）；
 3. 开 PR（一个 PR 只投这一个条目）；
 4. CI 依次检查：条目数 ≤ 3 → `dsh.bundle` 存在 → 仓库年龄 ≥ 1 天 → lint/站点构建；
 5. 维护者人工核对**描述与代码一致**（功能、数字、API 名都算声明）、分类合理（当前选 `tools`）、非空壳非聚合包。

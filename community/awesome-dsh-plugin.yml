@@ -1,14 +1,14 @@
 # awesome-dsh-plugin 投稿文件
 # 用途：向 https://github.com/awesome-dsh-plugin/awesome-dsh-plugin 提 PR 时，
-#       把本文件内容保存为 data/plugins/phantasy__dsh-rss.yml（文件名 = owner__repo）。
+#       把本文件内容保存为 data/plugins/weixshaw__dsh-rss.yml（文件名 = owner__repo）。
 # 规则要点（contributing.md）：
 #  - 一个 PR 最多 3 条；只新增自己这一条，不改别人条目、不手编 README；
 #  - url 必须与仓库完全一致；description 只描述功能、不含营销词、必须与代码核对属实；
 #  - description 含「冒号+空格」时必须加引号（下面已加，避免 YAML 解析问题）；
 #  - 仓库需添加 GitHub topic：dsh-plugin；仓库创建满 1 天；package.json 声明 dsh.bundle（本仓库已满足）。
 #  - 可选 tarball 字段：本仓库可直接从源码安装（dsh.bundle 完整），无需 tarball。
-url: https://github.com/phantasy/dsh-rss
-name: phantasy/dsh-rss
+url: https://github.com/weixshaw/dsh-rss
+name: weixshaw/dsh-rss
 category: tools
 description:
   en: "RSS/Atom reader with grouped subscriptions and unread/total counts, FreshRSS account sync over the Google Reader API with read/star written back, local image proxy, optional BYOK AI summary/translate/Q&A, podcast audio playback and full-text fetch."

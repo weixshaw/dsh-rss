@@ -67,7 +67,7 @@ test('关键文件在位', () => {
 test('README：中文文档覆盖安装/FreshRSS/AI/安全', () => {
   const r = readFileSync(join(root, 'README.md'), 'utf8')
   // 安装：desktop 走 GUI（添加插件 + Git 仓库地址），CLI 拒绝需说明；CLI 示例仅限自建 profile
-  assert.ok(r.includes('添加插件') && r.includes('github.com/phantasy/dsh-rss'), 'GUI 安装：添加插件 + Git 仓库地址')
+  assert.ok(r.includes('添加插件') && r.includes('github.com/weixshaw/dsh-rss'), 'GUI 安装：添加插件 + Git 仓库地址')
   assert.ok(r.includes('managed exclusively by the Electron application'), 'desktop profile 的 CLI 拒绝说明')
   assert.ok(r.includes('dsh plugin --profile web'), '自建 profile CLI 示例')
   assert.ok(/仅自建\s*profile|仅适用于自建\s*profile/.test(r), 'CLI 示例明确标注仅自建 profile')

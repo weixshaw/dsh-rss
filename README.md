@@ -34,7 +34,7 @@
 **desktop profile 由 Electron 应用独占管理，`dsh` CLI 会直接拒绝**（这是设计行为，不是故障）：
 
 ```
-dsh plugin --profile desktop add github:phantasy/dsh-rss
+dsh plugin --profile desktop add github:weixshaw/dsh-rss
 error: profile "desktop" is managed exclusively by the Electron application
 ```
 
@@ -44,7 +44,7 @@ error: profile "desktop" is managed exclusively by the Electron application
 2. 点击 **「添加插件 / Add plugin」**。输入框接受**包名（可带版本）、Git 地址、压缩包（tarball）或本地绝对路径**——粘贴本仓库 Git 地址：
 
    ```
-   https://github.com/phantasy/dsh-rss
+   https://github.com/weixshaw/dsh-rss
    ```
 
 3. 阅读输入框上方关于信任的提示，点击 **「安装 / Install」**。安装进度会流式显示 pnpm 输出，可取消；失败会自动恢复 profile 的 `package.json` 与 `pnpm-lock.yaml`。
@@ -58,7 +58,7 @@ error: profile "desktop" is managed exclusively by the Electron application
 CLI 插件管理只对**自己创建的 profile**可用（desktop 不行）：
 
 ```bash
-dsh plugin --profile web add github:phantasy/dsh-rss
+dsh plugin --profile web add github:weixshaw/dsh-rss
 ```
 
 该命令在 profile 目录里用 pnpm 安装本包，并依据 `package.json` 的 `dsh.bundle.patch`（`cordis.patch.yml`）把 `dsh-rss` 追加进 `dsh.profile.bundles` 自动挂载；CLI/headless profile 会热应用 patch，改完硬刷新浏览器即可。

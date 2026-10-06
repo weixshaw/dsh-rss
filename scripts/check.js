@@ -77,7 +77,7 @@ expect(/name:\s*'?dsh-rss'?/.test(patch), "name: 'dsh-rss'")
 // 5) README 关键内容
 console.log('[5/6] README 关键内容')
 const readme = readFileSync(join(root, 'README.md'), 'utf8')
-expect(readme.includes('添加插件') && readme.includes('github.com/phantasy/dsh-rss'), 'GUI 安装：添加插件 + Git 仓库地址')
+expect(readme.includes('添加插件') && readme.includes('github.com/weixshaw/dsh-rss'), 'GUI 安装：添加插件 + Git 仓库地址')
 expect(readme.includes('managed exclusively by the Electron application'), 'desktop profile 的 CLI 拒绝说明（Electron 独占管理）')
 expect(readme.includes('dsh plugin --profile web') && readme.includes('自建 profile'), '自建 profile（如 web）的 CLI 示例且明确标注适用范围')
 expect(readme.includes('API 密码'), '包含 FreshRSS API 密码说明')
